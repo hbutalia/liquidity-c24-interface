@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <!-- detect camel route -->
+    <camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring" trace="true">
+
+
+        <routeBuilder ref="inboundFilePollingRoute"/>
+        <routeBuilder ref="inboundMessageHandlingRoute"/>
+        <routeBuilder ref="inboundMessagePersistenceRoute"/>
+        <routeBuilder ref="inboundMessageWriteRoute"/>
+
+        <routeBuilder ref="outboundJDBCPollerRoute"/>
+        <routeBuilder ref="outboundMessageHandlingRoute"/>
+        <routeBuilder ref="outboundJmsRoute"/>
+        <routeBuilder ref="outboundMessageWriteRoute"/>
+        <routeBuilder ref="outboundUpdatePollRowRoute"/>
+        <routeBuilder ref="invokeWithProcessorSpringRoute" />
+		<route>
+			<from uri="activemq:queue:test.queue" />
+			<to uri="bean:preProcessor?method=appendCamel" />
+			<to uri="stream:out" />
+		</route>
+    </camelContext>
+	
+</beans>
