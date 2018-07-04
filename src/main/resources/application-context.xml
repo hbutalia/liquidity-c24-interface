@@ -14,11 +14,15 @@
 	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
-	<bean id="preProcessor" class="biz.c24.io.route.PreProcessor" />
 
-	
 
-	<import resource="camel-context.xml" />
 
+	<!-- <bean id="contentBasedFileRouter" class="biz.c24.io.route.ContentBasedFileRouter" 
+		/> <bean id="fileRouter" class="biz.c24.io.route.FileRouter" /> <bean id="fileProcessor" 
+		class="biz.c24.io.route.FileNameProcessor" /> <bean id="myFileProcessor" 
+		class="biz.c24.io.processor.FileProcessor" /> -->
+	<bean id="startJmsRoute" class="biz.c24.io.route.StartJmsRoute" />
+	<bean id="jmsToFile" class="biz.c24.io.route.JmsToFile" />
+	<bean id="contentBasedRouter" class="biz.c24.io.route.ContentBasedRouter" />
 
 </beans>

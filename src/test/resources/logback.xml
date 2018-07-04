@@ -23,12 +23,12 @@
         </encoder>
     </appender>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 
     <logger name="biz.c24.io" level="INFO"/>
-    <logger name="org.apache.camel" level="DEBUG"/>
+    <logger name="org.apache.camel" level="INFO"/>
 
 
 </configuration>

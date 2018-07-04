@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
-    <!-- detect camel route -->
-    <camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring" trace="true">
+	<!-- detect camel route -->
 
+	<camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring"		trace="true">
+<!-- 		
+		<routeBuilder ref="fileRouter" /> -->
+		<routeBuilder ref="jmsToFile" />
+		<routeBuilder ref="contentBasedRouter" />
+		<route >
 
-        <routeBuilder ref="inboundFilePollingRoute"/>
-        <routeBuilder ref="inboundMessageHandlingRoute"/>
-        <routeBuilder ref="inboundMessagePersistenceRoute"/>
-        <routeBuilder ref="inboundMessageWriteRoute"/>
+			<!-- Read files from input directory -->
+			<from uri="file://src/test/data/input" />
 
-        <routeBuilder ref="outboundJDBCPollerRoute"/>
-        <routeBuilder ref="outboundMessageHandlingRoute"/>
-        <routeBuilder ref="outboundJmsRoute"/>
-        <routeBuilder ref="outboundMessageWriteRoute"/>
-        <routeBuilder ref="outboundUpdatePollRowRoute"/>
-        <routeBuilder ref="invokeWithProcessorSpringRoute" />
-		<route>
-			<from uri="activemq:queue:test.queue" />
-			<to uri="bean:preProcessor?method=appendCamel" />
+			<!-- Transform content to UpperCase -->
+			<process ref="myFileProcessor" />
+
+			<!-- Write converted file content -->
+			<to uri="file://src/test/data/outputUpperCase" />
+
+			<!-- Transform content to LowerCase -->
+			<transform>
+				<simple>${body.toLowerCase()}</simple>
+			</transform>
+
+			<!-- Write converted file content -->
+			<to uri="file://src/test/data/outputLowerCase" />
+
+			<!-- Display process completion message on console -->
+			<transform>
+				<simple>.......... File content conversion completed ..........</simple>
+			</transform>
 			<to uri="stream:out" />
+
 		</route>
-    </camelContext>
-	
+
+	</camelContext>
+
 </beans>
