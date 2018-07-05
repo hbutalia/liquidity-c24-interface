@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			</dependency>
+		</dependency>
 		<!-- Route anyone using Commons Logging (Spring) through our SL4J setup -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -159,7 +159,15 @@
 			<version>${camel.version}</version>
 		</dependency>
 
+		<!-- Oracle JDBC driver <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc7</artifactId> 
+			<version>12.1.0</version> </dependency> -->
 
+		<!-- Common DBCP2 connection pool -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>
@@ -191,7 +199,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			</dependency>
+		</dependency>
 
 
 		<!-- Apache Commons -->
@@ -238,8 +246,8 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
@@ -276,7 +284,7 @@
 	</dependencies>
 
 	<build>
-			<!-- Turn on filtering by default for application properties -->
+		<!-- Turn on filtering by default for application properties -->
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
@@ -355,6 +363,12 @@
 					<mainClass>biz.c24.io.Application</mainClass>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.4.0.905</version>
+			</plugin>
+
 		</plugins>
 	</build>
 

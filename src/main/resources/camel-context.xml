@@ -10,10 +10,10 @@
 
 	<camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring"		trace="true">
 <!-- 		
-		<routeBuilder ref="fileRouter" /> -->
+		<routeBuilder ref="fileRouter" /> 
 		<routeBuilder ref="jmsToFile" />
-		<routeBuilder ref="contentBasedRouter" />
-		<route >
+		<routeBuilder ref="contentBasedRouter" /> -->
+		<route>
 
 			<!-- Read files from input directory -->
 			<from uri="file://src/test/data/input" />

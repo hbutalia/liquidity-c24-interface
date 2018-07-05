@@ -7,7 +7,11 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:property-placeholder location="classpath:application.properties" />
+
 	<context:component-scan base-package="biz.c24.io" />
+	<import resource="classpath:camel-context.xml" />
+	<!-- <import resource="classpath:application-datasource.xml" /> -->
+
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616" />
 	</bean>
@@ -19,10 +23,13 @@
 
 	<!-- <bean id="contentBasedFileRouter" class="biz.c24.io.route.ContentBasedFileRouter" 
 		/> <bean id="fileRouter" class="biz.c24.io.route.FileRouter" /> <bean id="fileProcessor" 
-		class="biz.c24.io.route.FileNameProcessor" /> <bean id="myFileProcessor" 
-		class="biz.c24.io.processor.FileProcessor" /> -->
+		class="biz.c24.io.route.FileNameProcessor" /> -->
 	<bean id="startJmsRoute" class="biz.c24.io.route.StartJmsRoute" />
 	<bean id="jmsToFile" class="biz.c24.io.route.JmsToFile" />
 	<bean id="contentBasedRouter" class="biz.c24.io.route.ContentBasedRouter" />
+	<bean id="preProcessor" class="biz.c24.io.processor.PreProcessor" />
+	<bean id="myFileProcessor" class="biz.c24.io.processor.FileProcessor" />
+
+
 
 </beans>

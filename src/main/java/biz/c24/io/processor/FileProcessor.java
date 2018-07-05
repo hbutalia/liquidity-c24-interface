@@ -5,7 +5,7 @@ import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-@Component
+
 public class FileProcessor implements Processor {
 	private static final Logger LOGGER =   LoggerFactory.getLogger(FileProcessor.class);
 
