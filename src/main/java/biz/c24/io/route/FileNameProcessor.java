@@ -13,10 +13,10 @@ public class FileNameProcessor implements Processor {
 
 	public void process(Exchange exchange) throws Exception {
 		
-		String originalFileName = (String) exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-		String changedFileName = dateFormat.format(date) + originalFileName;
+		final String originalFileName = (String) exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
+		final Date date = new Date();
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		final String changedFileName = dateFormat.format(date) + originalFileName;
 		LOGGER.info("Processing... FileNameProcessor changedFileName");
 		exchange.getIn().setHeader(Exchange.FILE_NAME, changedFileName);
 	}

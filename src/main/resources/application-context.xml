@@ -28,8 +28,8 @@
 	<bean id="jmsToFile" class="biz.c24.io.route.JmsToFile" />
 	<bean id="contentBasedRouter" class="biz.c24.io.route.ContentBasedRouter" />
 	<bean id="preProcessor" class="biz.c24.io.processor.PreProcessor" />
-	<bean id="myFileProcessor" class="biz.c24.io.processor.FileProcessor" />
-
-
+	<bean id="myFileProcessor" class="biz.c24.io.processor.FileProcessor" /> 
+	<bean id="inboundFilePollingRoute" class="biz.c24.io.route.InboundFilePollingRoute" />
+	<bean id="inboundMessageHandlingRoute" class="biz.c24.io.route.InboundMessageHandlingRoute" />
 
 </beans>

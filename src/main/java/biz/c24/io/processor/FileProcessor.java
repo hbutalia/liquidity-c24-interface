@@ -9,11 +9,9 @@ import org.springframework.stereotype.Component;
 public class FileProcessor implements Processor {
 	private static final Logger LOGGER =   LoggerFactory.getLogger(FileProcessor.class);
 
-    public void process(Exchange exchange) throws Exception {
-    	 LOGGER.info("$$$$$$$$$$$$$$$ FileProcessor....");
-    
-        String originalFileContent = exchange.getIn().getBody(String.class);
-        String upperCaseFileContent = originalFileContent.toUpperCase();
+    public void process(final Exchange exchange) throws Exception {
+        final String originalFileContent = exchange.getIn().getBody(String.class);
+        final String upperCaseFileContent = originalFileContent.toUpperCase();
         LOGGER.info("$$$$$$$$$$$$$$$ FileProcessor upperCaseFileContent "+upperCaseFileContent);
         exchange.getIn().setBody(upperCaseFileContent);
     }
